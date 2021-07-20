@@ -88,3 +88,43 @@ SC_MODULE (comparator)
 		sensitive << reference << comparison;
 	}
 };
+
+SC_MODULE (splitter)
+{
+	sc_in <NN_DIGIT> input;
+	sc_out <NN_DIGIT> low;
+	sc_out <NN_DIGIT> high;
+
+	void splitter_process();
+	SC_CTOR(splitter)
+	{
+		SC_THREAD(splitter_process);
+		sensitive << input;
+	}
+};
+
+SC_MODULE (highhalf)
+{
+	sc_in <NN_DIGIT> input;
+	sc_out <NN_DIGIT> output;
+
+	void highhalf_process();
+	SC_CTOR(highhalf)
+	{
+		SC_THREAD(highhalf_process);
+		sensitive << input;
+	}
+};
+
+SC_MODULE (tohighhalf)
+{
+	sc_in <NN_DIGIT> input;
+	sc_out <NN_DIGIT> output;
+
+	void tohighhalf_process();
+	SC_CTOR(tohighhalf)
+	{
+		SC_THREAD(tohighhalf_process);
+		sensitive << input;
+	}
+};

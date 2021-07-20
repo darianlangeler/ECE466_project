@@ -56,3 +56,19 @@ void comparator:comparator_process()
 		result.write(false);
 	}
 }
+
+void splitter:splitter_process()
+{
+	low.write(input.read() & MAX_NN_HALF_DIGIT);
+	high.write((input.read() >> NN_HALF_DIGIT_BITS) & MAX_NN_HALF_DIGIT);
+}
+
+void highhalf:highhalf_process()
+{
+	output.write((input.read() >> NN_HALF_DIGIT_BITS) & MAX_NN_HALF_DIGIT);
+}
+
+void tohighhalf:tohighhalf_process()
+{
+	output.write(input.read() << NN_HALF_DIGIT_BITS);
+}
