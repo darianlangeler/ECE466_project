@@ -16,7 +16,7 @@ SC_MODULE(reg)
 	{
 		SC_CTHREAD(reg_process, clk.pos());
 	}
-}
+};
 
 SC_MODULE(mux)
 {
@@ -29,8 +29,9 @@ SC_MODULE(mux)
 	SC_CTOR(mux)
 	{
 		SC_THREAD(mux_process);
+		sensitive << control << data_in_1 << data_in_2;
 	}
-}
+};
 
 SC_MODULE(adder)
 {
@@ -42,8 +43,9 @@ SC_MODULE(adder)
 	SC_CTOR(adder)
 	{
 		SC_THREAD(adder_process);
+		sensitive << summand_1 << summand_2;
 	}
-}
+};
 
 SC_MODULE(subber)
 {
@@ -55,8 +57,9 @@ SC_MODULE(subber)
 	SC_CTOR(subber)
 	{
 		SC_THREAD(subber_process);
+		sensitive << minuend << subtrahend;
 	}
-}
+};
 
 SC_MODULE (multiplier)
 {
@@ -68,8 +71,9 @@ SC_MODULE (multiplier)
 	SC_CTOR(multiplier)
 	{
 		SC_THREAD(multiplier_process);
+		sensitive << multiplicand_1 << multiplicand_2;
 	}
-}
+};
 
 SC_MODULE (comparator)
 {
@@ -81,5 +85,6 @@ SC_MODULE (comparator)
 	SC_CTOR(comparator)
 	{
 		SC_THREAD(comparator_process);
+		sensitive << reference << comparison;
 	}
-}
+};
