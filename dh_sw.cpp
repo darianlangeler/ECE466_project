@@ -467,14 +467,14 @@ NN_DIGIT c
   to_hw2.write(c);
   to_hw3.write(aHigh);
   
-// This computation is now performed in hardware.
-/* Synchronization is done via blocking read/write 
-   (to be replaced by handshaking). */
+  // Handshake protocol
+  hw_enable.write(true);
+  while(hw_done.read() == false){}
 
   t[0] = from_hw0.read();
   t[1] = from_hw1.read();
   aHigh = from_hw2.read();
-  
+  hw_enable.write(false);
 }
 
 /*** This function computes reference values for verification ***/

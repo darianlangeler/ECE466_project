@@ -6,6 +6,8 @@
 
 SC_MODULE (dh_hw)
 {
+  sc_in_clk clk;
+
   sc_fifo_in <NN_DIGIT> from_sw0, from_sw1, from_sw2;
   sc_fifo_in <NN_HALF_DIGIT> from_sw3;
 
@@ -19,7 +21,7 @@ SC_MODULE (dh_hw)
   
   SC_CTOR (dh_hw)
   {
-    SC_THREAD (process_hw);
+    SC_THREAD (process_hw, clk.pos());
   }
   
 };
