@@ -21,7 +21,7 @@ SC_MODULE (dh_hw)
   
   SC_CTOR (dh_hw)
   {
-    SC_THREAD (process_hw, clk.pos());
+    SC_CTHREAD (process_hw, clk.pos());
   }
   
 };
