@@ -4,10 +4,10 @@
 
 #define WAIT 0
 #define INPUT 1
-#define EXECUTE 2
-#define E1 3
-#define E2 4
-#define E3 5
+#define UPDATE 2
+#define T1_UPDATE_1 3
+#define T1_UPDATE_2 4
+#define T1_UPDATE_3 5
 #define BONUS 6
 #define OUTPUT 7
 #define FINISH 8
@@ -33,23 +33,23 @@ void dh_hw::process_hw()
           break;
         case INPUT:
           load.write(true);
-          state = EXECUTE;
+          state = UPDATE;
           break;
-        case EXECUTE:
+        case UPDATE:
           load.write(false);
           comp_mux_control.write(comp_out.read());
-          state = E1;
+          state = T1_UPDATE_1;
           break;
-        case E1:
+        case T1_UPDATE_1:
           sub_comp_mux_control.write(true);
-          state = E2;
+          state = T1_UPDATE_2;
           break;
-        case E2:
+        case T1_UPDATE_2:
           sub_comp_mux_control.write(false);
           sub_uhh_mux_control.write(true);
-          state = E3;
+          state = T1_UPDATE_3;
           break;
-        case E3:
+        case T1_UPDATE_3:
           sub_uhh_mux_control.write(false);
           sub_v_mux_control.write(true);
           // Get values for bonus
