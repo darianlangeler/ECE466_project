@@ -18,8 +18,8 @@ void dh_hw::process_hw()
   // initially not done and in wait state
   hw_done.write(false);
   state = WAIT;
-  for (;;) {  
-      
+  for (;;) 
+  {  
       switch(state)
       {
         case WAIT:
@@ -29,18 +29,13 @@ void dh_hw::process_hw()
           }
           break;
         case INPUT:
-          loadT0.write(1);
-          loadT1.write(1);
-          loadC.write(1);
-          loadA.write(1);
+          load.write(true);
           break;
         case EXECUTE:
           t[0] = from_sw0.read();
           t[1] = from_sw1.read();
           c = from_sw2.read();
           aHigh = from_sw3.read();
-          // Original code from NN_DigitDivHH():  
-
           /*** Begin: Required part (to do: Datapath + Control) ***/
           cHigh = (NN_HALF_DIGIT)HIGH_HALF (c);
           cLow = (NN_HALF_DIGIT)LOW_HALF (c);
@@ -77,6 +72,7 @@ void dh_hw::process_hw()
           if (hw_enable.read() == false)
           {
             hw_done.write(false);
+            reset.write(false);
             state = WAIT;
           }
           break;
